@@ -11,8 +11,9 @@ class Watermark:
 
         self.image: Image = cast(Image, None)
         self.watermark: Image = cast(Image, None)
-        self.side: int = cast(int, None)
-        # (left, upper, right, lower) where each value is based on the left corner (0, 0)
+        self.squares: int = 8
+        self.widthSide: int = cast(int, None)
+        self.heightSide: int = cast(int, None)
         self.positions: list = []
 
     def watermark_image(self, image: Image, watermark: Image, position: int) -> Image or None:
@@ -36,19 +37,47 @@ class Watermark:
             print(f"There has been an error when processing 'image': {e}")
             return None
 
-    def set_positions(self):
+    def set_positions(self) -> None:
+        # Calculates the four positions of each corner according to the resulting sides,
+        # dividing the image into self.squares * self.squares.
+
+        # (left, upper, right, lower) where each value is based on the left corner (0, 0).
         self.positions = [
-            (0, 0, self.side, self.side),  # left upper corner
-            (self.side * 3, 0, self.side * 4, self.side),  # right upper corner
-            (0, self.side * 3, self.side, self.side * 4),  # left lower corner
-            (self.side * 3, self.side * 3, self.side * 4, self.side * 4)  # right lower corner
+            # left upper corner
+            (
+                0, 0, self.widthSide, self.heightSide
+            ),
+            # right upper corner
+            (
+                self.widthSide * (self.squares - 1), 0, self.widthSide * self.squares, self.heightSide
+            ),
+            # left lower corner
+            (
+                0, self.heightSide * (self.squares - 1), self.widthSide, self.heightSide * self.squares
+            ),
+            # right lower corner
+            (
+                self.widthSide * (self.squares - 1), self.heightSide * (self.squares - 1),
+                self.widthSide * self.squares, self.heightSide * self.squares
+            )
         ]
 
+        return None
+
     def scale_watermark(self) -> None:
-        # This process is considering that the image size if properly scaled, being as close as possible to a square
+        # Sets the sides according to the image size and the number of squares. Then, scales
+        # the image using the calculated sides.
 
-        self.side = self.image.size[0] // 4
+        try:
+            self.widthSide = self.image.size[0] // self.squares
+            self.heightSide = self.image.size[1] // self.squares
 
-        self.watermark = self.watermark.resize((self.side, self.side))
+            self.watermark = self.watermark.resize((self.widthSide, self.heightSide))
 
-        self.set_positions()
+            self.set_positions()
+
+        except Exception as e:
+            print(f"There has been an error when resizing 'watermark': {e}")
+
+        finally:
+            return None
