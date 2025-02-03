@@ -9,14 +9,14 @@ def select_file() -> Image:
     # Uses the current working directory for the initial directory and only accepts png and jpg or jpeg
     # files, could add more files according to PIL Image compatibility. This works with image outside the cwd.
 
-    workingDirectory = getcwd()
-    fileTypes = (
+    workingDirectory: str = getcwd()
+    fileTypes: tuple = (
         ("PNG files", "*.png"),
         ("JPEG files", ("*.jpeg", "*.jpg"))
     )
 
-    openImage = filedialog.askopenfilename(title="Open image", initialdir=workingDirectory, filetypes=fileTypes)
-    image = Image.open(openImage)
+    openImage: str = filedialog.askopenfilename(title="Open image", initialdir=workingDirectory, filetypes=fileTypes)
+    image: Image = Image.open(openImage)
 
     return image
 
@@ -35,6 +35,7 @@ class UI:
         self.__originalImage: Image = cast(Image, None)
         self.__originalMark: Image = cast(Image, None)
         self.__position: int = cast(int, None)
+        self.__watermarked: bool = False
 
         self.__root: Tk = Tk()
         self.__root.title("Image Watermarking")
@@ -66,14 +67,14 @@ class UI:
         self.__saveButton.grid(column=4, row=0, sticky="nsew")
 
     def __select_image(self) -> None:
-        openImage = select_file()
+        openImage: str = select_file()
 
         self.__set_canvas_image(image=openImage)
 
         return None
 
     def __select_mark(self) -> None:
-        openImage = select_file()
+        openImage: str = select_file()
 
         self.__originalMark = openImage
 
@@ -81,7 +82,7 @@ class UI:
 
     def __select_position(self) -> None:
         while True:
-            position = simpledialog.askinteger(
+            position: int = simpledialog.askinteger(
                 title="Select Position", prompt="Introduce the corner position you want to mark (1-4):"
             )
             if 0 < position < 5:
@@ -95,11 +96,13 @@ class UI:
 
     def __watermark_image(self) -> None:
         if self.__originalImage and self.__originalMark and self.__position:
-            wk = Watermark()
-            result = wk.watermark_image(
+            wk: Watermark = Watermark()
+            result: Image = wk.watermark_image(
                 image=self.__originalImage, watermark=self.__originalMark, position=self.__position - 1
             )
             self.__set_canvas_image(image=result)
+
+            self.__watermarked = True
         else:
             messagebox.showwarning(
                 message="You need to select all the required elements first!"
@@ -107,8 +110,29 @@ class UI:
 
         return None
 
-    def __save_image(self):
-        pass
+    def __save_image(self) -> None:
+        if self.__watermarked:
+            saveImage: str = filedialog.asksaveasfilename(
+                defaultextension=".jpeg",
+                filetypes=(
+                    ("PNG files", "*.png"),
+                    ("JPEG files", ("*.jpeg", "*.jpg"))
+                )
+            )
+
+            if saveImage:
+                try:
+                    self.__originalImage.save(saveImage)
+                    print("Image successfully saved")
+                except Exception as e:
+                    print(f"Error saving the image: {e}")
+
+            self.__originalImage = None
+            self.__originalMark = None
+            self.__position = None
+            self.__watermarked = False
+
+        return None
 
     def __set_canvas_image(self, image: Image) -> bool:
         """
