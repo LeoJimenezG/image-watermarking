@@ -1,9 +1,55 @@
-# Image Watermarking 🖼️
-Project to watermark an image on a given position and mark using Tkinter and Pillow libraries.
+# Image Watermarking
+
+Python GUI tool for watermarking images with a selected image at pre-defined positions, built using Tkinter and Pillow.
 
 ---
 
-## 📘 How Does It Work?
+## Installation
+
+To get this project up and runnig on your local machine following instructions.
+
+### Prerequisites
+Before anything else, make sure you have installed **Python 3.x** or more in your system.
+
+### Steps
+1. **Clone the repository:**
+Open your prefered terminal and clone the project to your local machine
+    ```bash
+    git clone https://github.com/LeoJimenezG/image-watermarking.git
+    ```
+2.  **Navigate into the project directory:**
+    ```bash
+    cd image-watermarking
+    ```
+3. **Create a Virtual Environment (Recommended):**
+It's a good practice to use a virtual environment to manage project dependencies. This ensures that the project's dependencies don't interfere with other Python projects or your system's Python installation.
+    * Create the virtual environment:
+        ```bash
+        python -m venv .venv
+        ```
+    * Activate the virtual environment:
+        * **On macOS / Linux:**
+            ```bash
+            source .venv/bin/activate
+            ```
+        * **On Windows (Command Prompt):**
+            ```bash
+            .venv\Scripts\activate.bat
+            ```
+4. **Install Project Dependencies:**
+With your virtual environment activated, install all the required libraries (like Pillow) using `pip`:
+    ```bash
+    pip install Pillow
+    ```
+5. **Run the Application:**
+Finally, execute the main script to launch the Image Watermarking Application:
+    ```bash
+    python main.py
+    ```
+
+---
+
+## How Does It Work?
 
 This project provides a single, streamlined functionality built with an object-oriented approach and a graphical user interface. It allows you to apply a watermark (another image) onto a target image, placing the watermark in one of the four given corner positions.
 
@@ -39,7 +85,7 @@ The entire watermarking process is completed through the GUI buttons in **five s
 
 ---
 
-## 🪛 Application Configuration
+## Application Configuration
 
 ### UI Class Configurations
 - **Accepted File Types**:
@@ -74,7 +120,7 @@ The entire watermarking process is completed through the GUI buttons in **five s
 
 ---
 
-## 💡 Notes
+## Notes
 
 - For optimal visual results during the watermarking process, it is highly recommended to use an image that is as close to a square as possible. This recommendation is solely for display purposes—the actual watermarking process remains unaffected by the image's dimensions.
 - Although the PIL Image Object can handle various formats, this project is limited to **PNG**, **JPEG**, and **JPG** formats for simplicity.
@@ -83,8 +129,9 @@ The entire watermarking process is completed through the GUI buttons in **five s
 
 ---
 
-## 📚Useful Resources
+## Useful Resources
 
-- [PIL documentation](https://pillow.readthedocs.io/en/stable/handbook/tutorial.html)
-- [typing documentation](https://docs.python.org/3/library/typing.html)
-- [Tkinter documentation](https://docs.python.org/3/library/tk.html)
+- [PIL documentation](https://pillow.readthedocs.io/en/stable/handbook/tutorial.html) - Official documentation for the Pillow library, a powerful tool for image processing and manipulation in Python.
+- [typing documentation](https://docs.python.org/3/library/typing.html) - Official documentation for Python's typing module, which provides support for type hints.
+- [Tkinter documentation](https://docs.python.org/3/library/tk.html) - Official documentation for Tkinter, Python's standard library for building graphical user interfaces (GUIs)
+
