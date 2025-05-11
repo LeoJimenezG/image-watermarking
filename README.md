@@ -133,5 +133,5 @@ The entire watermarking process is completed through the GUI buttons in **five s
 
 - [PIL documentation](https://pillow.readthedocs.io/en/stable/handbook/tutorial.html) - Official documentation for the Pillow library, a powerful tool for image processing and manipulation in Python.
 - [typing documentation](https://docs.python.org/3/library/typing.html) - Official documentation for Python's typing module, which provides support for type hints.
-- [Tkinter documentation](https://docs.python.org/3/library/tk.html) - Official documentation for Tkinter, Python's standard library for building graphical user interfaces (GUIs)
+- [Tkinter documentation](https://docs.python.org/3/library/tk.html) - Official documentation for Tkinter, Python's standard library for building graphical user interfaces (GUIs).
 
