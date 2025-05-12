@@ -6,7 +6,7 @@ Python GUI tool for watermarking images with a selected image at pre-defined pos
 
 ## Installation
 
-To get this project up and runnig on your local machine follow all of the next instructions.
+To get this project up and runnig on your local machine, follow the next instructions.
 
 ### Prerequisites
 Before anything else, make sure you have installed **Python 3.x** or more in your system.
