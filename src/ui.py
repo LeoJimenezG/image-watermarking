@@ -32,7 +32,6 @@ class UI:
         :return: returns nothing.
         """
         self.__root_size: list = [800, 700]  # Width - Height
-        self.__canvas_size: list = [800, 700]  # Width - Height
         self.__font: tuple = ("Courier", 20, "normal")
 
         self.__original_img: Image.Image = cast(Image.Image, None)
@@ -95,14 +94,13 @@ class UI:
         self.__root.update_idletasks()
 
         self.__root_size[0] = self.__root.winfo_width()
-        self.__canvas_size[0] = self.__root.winfo_width()
 
         self.__canvas = Canvas(
             master=self.__root,
-            width=self.__canvas_size[0],
-            height=self.__canvas_size[1]
+            width=self.__root_size[0],
+            height=self.__root_size[1]
         )
-        self.__canvas.grid(column=0, row=1, columnspan=6, sticky="nsew")
+        self.__canvas.grid(column=0, row=1, columnspan=5, sticky="nsew")
 
     def __select_image(self) -> None:
         self.__set_canvas_img(image=select_file())
@@ -173,32 +171,35 @@ class UI:
         try:
             self.__original_img = image
             if (
-                self.__original_img.size[0] > self.__canvas_size[0]
+                self.__original_img.size[0] > self.__root_size[0]
                 and
-                self.__original_img.size[1] > self.__canvas_size[1]
+                self.__original_img.size[1] > self.__root_size[1]
             ):
                 resized_img: Image.Image = self.__original_img.resize(
-                    tuple(self.__canvas_size)
+                    tuple(self.__root_size)
                 )
                 self.__canvas_img = ImageTk.PhotoImage(resized_img)
-            elif self.__original_img.size[0] > self.__canvas_size[0]:
+            elif self.__original_img.size[0] > self.__root_size[0]:
                 resized_img: Image.Image = self.__original_img.resize(
-                    (self.__canvas_size[0], self.__original_img.size[1])
+                    (self.__root_size[0], self.__original_img.size[1])
                 )
                 self.__canvas_img = ImageTk.PhotoImage(resized_img)
-            elif self.__original_img.size[1] > self.__canvas_size[1]:
+            elif self.__original_img.size[1] > self.__root_size[1]:
                 resized_img: Image.Image = self.__original_img.resize(
-                    (self.__original_img.size[0], self.__canvas_size[1])
+                    (self.__original_img.size[0], self.__root_size[1])
                 )
                 self.__canvas_img = ImageTk.PhotoImage(resized_img)
             else:
                 self.__canvas_img = ImageTk.PhotoImage(self.__original_img)
 
-            center_x: int = self.__canvas_size[0] // 2
-            center_y: int = self.__canvas_size[1] // 2
+            center_x: int = self.__root_size[0] // 2
+            center_y: int = self.__root_size[1] // 2
 
             self.__canvas.delete("all")
-            self.__canvas.create_image(center_x, center_y, image=self.__canvas_img)
+            self.__canvas.create_image(
+                center_x, center_y,
+                image=self.__canvas_img
+            )
 
             return True
 
