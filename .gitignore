@@ -1,4 +1,6 @@
+.DS_Store
+.venv/
 .idea/
 __pycache__/
-img.jpeg
-tomate.png
+*.jpeg
+*.png
