@@ -164,7 +164,7 @@ class UI:
     def __set_canvas_img(self, image: Image.Image) -> bool:
         """
         Set an image in the canvas object.
-        :param image: a PIL (Pillow) Image object.
+        :param image: a PIL Image object.
         :return: returns True if the process didn't have any errors.
         Returns False otherwise.
         """
