@@ -53,12 +53,12 @@ Finally, execute the main script to launch the Image Watermarking Application:
 
 This project provides a single, streamlined functionality built with an object-oriented approach and a graphical user interface. It allows you to apply a watermark (another image) onto a target image, placing the watermark in one of the four given corner positions.
 
-The entire watermarking process is completed through the GUI buttons in **five steps**:
+The entire watermarking process is completed through the GUI buttons in **six steps**:
 
 ### 1. Select Image
 * **Choose the Target Image**: Select the Image you wish to watermark from any directory. For convenience, it's best if the image is in the same directory as the code.
 * **Display on GUI**: Once selected, the Image is shown on a Tkinter Canvas.
-* **Resizing for Display**: If the Image is larger than the Canvas, it will be resized to fit. This resizing is only for display purposes and does not affect the final Watermarked Image. For optimal display, use an Image as close to a square as possible.
+* **Resizing for Display**: If any of the Image dimensions are larger than the Canvas, it will be resized to fit. This resizing is only for display purposes and does not affect the final Watermarked Image.
 
 ### 2. Select Mark
 * **Choose the Mark Image**: Select an image to serve as the Mark, following a process similar to selecting the target Image.
@@ -73,14 +73,18 @@ The entire watermarking process is completed through the GUI buttons in **five s
   * **4**: Right Lower Corner
 * **Validation**: If an invalid Position is entered, the GUI will ask you to try again until a valid Position is provided, or you close the window.
 
-### 4. Watermark Image
-* **Apply the Watermark**: With the target Image, Mark, and valid Position selected, you can proceed to Watermark the image.
+### 4. Select Transparency
+* **Input the Transparency**: This value corresponds to the transparency of the Watermark and it must be a value between 0 and 1.0. Where 0 is full transparent and 1.0 is full opaque.
+* **Validation**: If an invalid Transparency is entered, the GUI will ask you to try again until a valid Transparency is provided, or you close the window.
+
+### 5. Watermark Image
+* **Apply the Watermark**: With the target Image, Mark, Position and Transparency selected, you can proceed to Watermark the image.
 * **Pre-Process Checks**: Attempting to watermark without completing the previous steps will trigger a warning, and the process will not continue.
 * **Display the Result**: Once successful, the Watermarked Image is displayed in the GUI. You can then choose to save it or repeat the process as needed.
 
-### 5. Save Watermarked 
+### 6. Save Watermarked 
 * **Save Your Work**: When satisfied with the Watermarked Image displayed on the GUI, save it to your files with a name of your choice.
-* **Supported Formats**: You can save the image in PNG, JPEG, or JPG formats (the same formats supported when selecting an image).
+* **Supported Formats**: You can save the image only in PNG format (the same format supported when selecting an image) due to simplicity and transparency issues for the moment.
 * **Reset for Next Process**: After saving, the current selections (Image, Mark, and Position) are cleared, allowing you to start a new watermarking process.
 
 ---
@@ -123,7 +127,7 @@ The entire watermarking process is completed through the GUI buttons in **five s
 ## Notes
 
 * The image displayed in the GUI is resized in order to properly fit in the canvas and avoid making it look weird, but it may still look different from the original image in some degree. However, this resizing process **does not affect the final result**, so the image keeps its original dimensions.
-* Although the PIL Image Object can handle various formats, this project is limited to **PNG**, **JPEG**, and **JPG** formats for simplicity.
+* Although the PIL Image Object can handle various formats, this project is limited to **PNG**format for simplicity and transparency issues with the images.
 * Many attributes within the `UI` class are configurable. Feel free to adjust them according to your requirements. The code is designed to work without issues after modifications.
 * Similarly, the `Watermark` class offers flexibility for changes. However, please ensure you understand the underlying code before making any adjustments.
 

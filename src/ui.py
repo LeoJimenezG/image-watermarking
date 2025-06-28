@@ -15,12 +15,11 @@ def select_file() -> Image.Image or None:
     """
     try:
         cwd: str = getcwd()
-        fileTypes: tuple = (
+        file_types: list = [
             ("PNG files", "*.png"),
-            ("JPEG files", ("*.jpeg", "*.jpg"))
-        )
+        ]
         abs_image_path: str = filedialog.askopenfilename(
-            title="Open Image File", initialdir=cwd, filetypes=fileTypes
+            title="Open Image File", initialdir=cwd, filetypes=file_types
         )
         selected_img: Image.Image = Image.open(abs_image_path)
         return selected_img
@@ -143,9 +142,9 @@ class UI:
     def __select_transparency(self) -> None:
         while True:
             try:
-                transparency: float = simpledialog.askfloat(
+                transparency: int = simpledialog.askfloat(
                     title="Select Transparency",
-                    prompt="Introduce the transparecy for the mark (0.0 - 1.0)"
+                    prompt="Introduce the transparecy for the mark (0 - 1.0)"
                 )
                 if 0 <= transparency <= 1.0:
                     break
@@ -187,11 +186,10 @@ class UI:
         try:
             if self.__watermarked:
                 saveImage: str = filedialog.asksaveasfilename(
-                    defaultextension=".jpeg",
-                    filetypes=(
+                    defaultextension=".png",
+                    filetypes=[
                         ("PNG files", "*.png"),
-                        ("JPEG files", ("*.jpeg", "*.jpg"))
-                    )
+                    ]
                 )
                 self.__original_img.save(saveImage)
                 self.__original_img = None
