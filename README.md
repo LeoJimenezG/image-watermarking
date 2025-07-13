@@ -25,7 +25,7 @@ Open your prefered terminal and clone the project to your local machine
 It's a good practice to use a virtual environment to manage project dependencies. This ensures that the project's dependencies don't interfere with other Python projects or your system's Python installation.
     * Create the virtual environment:
         ```bash
-        python -m venv .venv
+        python3 -m venv .venv
         ```
     * Activate the virtual environment:
         * **On macOS / Linux:**
